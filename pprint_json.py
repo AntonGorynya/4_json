@@ -19,21 +19,21 @@ def pretty_print_json(json_data, deep = 0, comma = 0):
     else:
         print_value(comma, deep, json_data)
 
-def print_list(deep,comma2,value):
+def print_list(deep, comma2, json_data):
     print("\t" * (deep), "[")
-    comma = len(value)
-    for listvalue in value:
+    comma = len(json_data)
+    for listvalue in json_data:
         pretty_print_json(listvalue, deep + 1, comma)
         comma = comma - 1
     print_right_border(comma2, deep, bound_type='list')
     return comma
 
-def print_dict(deep,comma2,value):
+def print_dict(deep, comma2, json_data):
     print("\t" * (deep), "{")
-    comma = len(value)
-    for dictkey in value:
+    comma = len(json_data)
+    for dictkey in json_data:
         print("\t" * (deep + 1), "\"{}\":".format(dictkey), end='')
-        pretty_print_json(value[dictkey], deep + 2, comma)
+        pretty_print_json(json_data[dictkey], deep + 2, comma)
         comma = comma - 1
     print_right_border(comma2, deep, bound_type='dict')
     return comma
