@@ -1,86 +1,73 @@
 import json
 from sys import argv
 
-
 filepath = argv[1]
 print(filepath)
 
-
 def load_data(filepath):
     with open(filepath) as f:
-        data = json.load(f)
-        print(data)
-    return data
+        json_data = json.load(f)
+        print(json_data)
+    return json_data
 
-
-def pretty_print_json(data,deep = 1, comma = 0):
- #   print('[\n\t{')
-    if isinstance(data,dict):
-        comma2 = len(data.keys())
+def pretty_print_json(json_data, deep = 1, comma = 0):
+    if isinstance(json_data, dict):
+        comma2 = len(json_data.keys())
         print("\t" * (deep-1), "{")
-        for key,value in data.items():
+        for key,value in json_data.items():
             print("\t"*deep,"\"{}\":".format(key), end = '')
-
-
             if isinstance(value,list):
                 print("\t"*(deep),"[")
                 comma = len(value)
-
                 for listvalue in value:
                     pretty_print_json(listvalue,deep+1, comma)
                     comma = comma - 1
-                    #print("comma =",comma)
-
-                if comma2 > 1:
-                    print("\t"*(deep),"],")
-                else:
-                    print("\t" * (deep), "]")
+                print_right_border(comma2, deep, type='list')
 
             if isinstance(value,dict):
                 print("\t" * (deep), "{")
                 comma = len(value)
-
                 for dictkey in value:
                     print("\t"*(deep+1),"\"{}\":".format(dictkey), end = '')
                     pretty_print_json(value[dictkey],deep+2, comma )
                     comma = comma - 1
-
-                if comma2 > 1:
-                    print("\t" * (deep), "},")
-                else:
-                    print("\t" * (deep), "}")
+                print_right_border(comma2, deep, type = 'dict')
 
             if (isinstance(value,list) == False and isinstance(value,dict) == False):
-               # print("comma2=",comma2)
-
-                if comma2 >1:
-                    print("\t"*(deep+1),"\"{}\",".format(value))
-                else:
-                    print("\t" * (deep + 1), "\"{}\"".format(value))
+                print_value(comma2, deep+1, value)
             comma2 = comma2-1
-        if comma > 1:
-            print("\t" * (deep-1), "},")
-        else:
-            print("\t" * (deep - 1), "}")
 
-    elif isinstance(data,list):
+        print_right_border(comma, deep-1, type = 'dict')
+
+    elif isinstance(json_data, list):
         # comma?
-        comma = len(data)
-        for listvalue2 in data:
+        comma = len(json_data)
+        for listvalue2 in json_data:
             print("\t" * (deep), "[")
             pretty_print_json(listvalue2,deep+1,comma)
             comma = comma - 1
             print("\t" * (deep), "]")
     else:
-        if comma>1:
-            print("\t"*(deep),"\"{}\",".format(data))
+        print_value(comma, deep, json_data)
 
+def print_right_border(comma,deep, type = 'dict'):
+    if type =='dict':
+        if comma > 1:
+            print("\t" * (deep), "},")
         else:
-            print("\t" * (deep), "\"{}\"".format(data))
+            print("\t" * (deep), "}")
+    elif type == 'list':
+        if comma > 1:
+            print("\t" * (deep), "],")
+        else:
+            print("\t" * (deep), "]")
 
+def print_value(comma,deep,json_data):
+    if comma > 1:
+        print("\t" * (deep), "\"{}\",".format(json_data))
 
-
-
+    else:
+        print("\t" * (deep), "\"{}\"".format(json_data))
 
 if __name__ == '__main__':
     deep = 0
