@@ -1,9 +1,9 @@
 # Prettify JSON
 
-Convert json output to pretty json output
+Read file in json format and then output it in pretty json format to console
 
 # Quickstart
-Script need installed json library
+
 You can download and run it directly through console
 
 Example of script launch on Linux, Python 3.5:
@@ -11,38 +11,21 @@ Example of script launch on Linux, Python 3.5:
 ```#!bash
 
 $ python pprint_json.py <path to file>
-Content of input file: {'Comment': 'My comment', 'Count': 10, 'DiskParam': {'DB': 10.0, 'DBAngle': 1.234}, 'Range': True, 'Blades': [{'Caption': 'A', 'Value': 65}, {'Caption': 'B', 'Value': 66}, {'Caption': 'C', 'Value': 67}], 'Slots': [0, 1, 2, 3]}
 
 Console output:
- {
-	 "Comment":		 "My comment",
-	 "Count":		 "10",
-	 "DiskParam":	 {
-		 "DB":			 "10.0",
-		 "DBAngle":			 "1.234"
-	 },
-	 "Range":		 "True",
-	 "Blades":	 [
-	 {
-		 "Caption":			 "A",
-		 "Value":			 "65"
-	 },
-	 {
-		 "Caption":			 "B",
-		 "Value":			 "66"
-	 },
-	 {
-		 "Caption":			 "C",
-		 "Value":			 "67"
-	 }
-	 ],
-	 "Slots":	 [
-		 "0",
-		 "1",
-		 "2",
-		 "3"
-	 ]
- }
+[
+    {
+        "Cells": {
+            "Address": "улица Академика Павлова, дом 10",
+            "AdmArea": "Западный административный округ",
+            "ClarificationOfWorkingHours": null,
+            "District": "район Кунцево",
+            "IsNetObject": "да",
+            "Name": "Ароматный Мир",
+            "OperatingCompany": "Ароматный Мир"
+                 }
+     }
+]
 
 ```
 
