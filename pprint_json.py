@@ -17,14 +17,14 @@ def pretty_print_json(json_data_in):
                      ensure_ascii=False))
 
 
-def createParser():
+def create_parser():
     parser = argparse.ArgumentParser(description='--> Pretty json output <--')
     parser.add_argument("path", nargs='+', help="path to json file")
     return parser
 
 
 if __name__ == '__main__':
-    parser = createParser()
+    parser = create_parser()
     namespace = parser.parse_args()
     if namespace.path:
         pretty_print_json(load_data(namespace.path[0]))
