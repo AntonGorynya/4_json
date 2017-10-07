@@ -22,11 +22,12 @@ def create_parser():
 
 
 '''
-C:/Users/g84086619/Documents/Devman/4_json-master/4_json-master/pprint_json.py ../new2.json   - выполняется успешно
-C:/Users/g84086619/Documents/Devman/4_json-master/4_json-master/pprint_json.py new2.json      - выполняется успешно
+pprint_json.py ../new2.json   - выполняется успешно
+pprint_json.py new2.json      - выполняется успешно
 '''
 if __name__ == '__main__':
     parser = create_parser()
     namespace = parser.parse_args()
     if namespace.path:
         pretty_print_json(load_data(namespace.path[0]))
+        
