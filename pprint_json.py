@@ -10,24 +10,20 @@ def load_data(filepath):
     return json_data
 
 
-def pretty_print_json(input_datat):
-    print(json.dumps(input_datat, sort_keys=True, indent=4,
+def pretty_print_json(input_data):
+    print(json.dumps(input_data, sort_keys=True, indent=4,
                      ensure_ascii=False))
 
 
 def create_parser():
     parser = argparse.ArgumentParser(description='--> Pretty json output <--')
-    parser.add_argument("path", nargs=1, help="path to json file")
+    parser.add_argument("path", help="path to json file")
     return parser
 
 
-'''
-pprint_json.py ../new2.json   - выполняется успешно
-pprint_json.py new2.json      - выполняется успешно
-'''
 if __name__ == '__main__':
     parser = create_parser()
     namespace = parser.parse_args()
     if namespace.path:
-        pretty_print_json(load_data(namespace.path[0]))
-        
+        print(namespace.path)
+        pretty_print_json(load_data(namespace.path))
